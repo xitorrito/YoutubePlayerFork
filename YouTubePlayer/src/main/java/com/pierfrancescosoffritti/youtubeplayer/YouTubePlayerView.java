@@ -278,4 +278,8 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
     public void hideUI(boolean hide) {
         playerControlsWrapper.hideUI(hide);
     }
+
+    public void hideYoutubeButton(boolean hide) {
+        playerControlsWrapper.hideYoutubeButton(hide);
+    }
 }

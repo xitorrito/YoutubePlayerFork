@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidYouTubePlayer.iml" filepath="$PROJECT_DIR$/AndroidYouTubePlayer.iml" />
+      <module fileurl="file://C:\Users\Xito\StudioProjects\AndroidYouTubePlayerFork\AndroidYouTubePlayer.iml" filepath="C:\Users\Xito\StudioProjects\AndroidYouTubePlayerFork\AndroidYouTubePlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidYouTubePlayerFork.iml" filepath="$PROJECT_DIR$/AndroidYouTubePlayerFork.iml" />
       <module fileurl="file://$PROJECT_DIR$/YouTubePlayer/YouTubePlayer.iml" filepath="$PROJECT_DIR$/YouTubePlayer/YouTubePlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
