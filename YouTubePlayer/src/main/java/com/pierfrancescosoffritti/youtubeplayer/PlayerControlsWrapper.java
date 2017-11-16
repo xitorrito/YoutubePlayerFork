@@ -396,4 +396,8 @@ class PlayerControlsWrapper implements View.OnClickListener, YouTubePlayerFullSc
         int visibility = hide ? View.GONE : View.VISIBLE;
         youTubeButton.setVisibility(visibility);
     }
+    void hideDurationVideo(boolean hide){
+        int visibility = hide ? View.GONE : View.VISIBLE;
+        videoDuration.setVisibility(visibility);
+    }
 }
