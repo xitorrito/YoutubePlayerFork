@@ -12,6 +12,7 @@ import com.pierfrancescosoffritti.youtubeplayer.YouTubePlayerView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private YouTubePlayerView youTubePlayerView;
     private FullScreenManager fullScreenManager;
 
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onReady() {
-                youTubePlayerView.loadVideo("6JYIGclVQdw", 0);
+//                youTubePlayerView.loadVideo("6JYIGclVQdw", 0);
+                youTubePlayerView.loadVideo("So91felGAmM", 0);
             }
 
         }, true);
