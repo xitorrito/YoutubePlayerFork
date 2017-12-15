@@ -18,14 +18,19 @@ import java.util.Set;
 
 public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.NetworkListener {
 
-    @NonNull private final NetworkReceiver networkReceiver;
+    @NonNull
+    private final NetworkReceiver networkReceiver;
 
-    @NonNull private final YouTubePlayer youTubePlayer;
+    @NonNull
+    private final YouTubePlayer youTubePlayer;
 
-    @NonNull private final View playerControls;
-    @NonNull private final PlayerControlsWrapper playerControlsWrapper;
+    @NonNull
+    private final View playerControls;
+    @NonNull
+    private final PlayerControlsWrapper playerControlsWrapper;
 
-    @NonNull private final PlaybackResumer playbackResumer;
+    @NonNull
+    private final PlaybackResumer playbackResumer;
 
     private final Set<YouTubePlayerFullScreenListener> fullScreenListeners;
 
@@ -64,7 +69,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // if wrap content make the view 16:9
-        if(getLayoutParams().height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+        if (getLayoutParams().height == ViewGroup.LayoutParams.WRAP_CONTENT) {
             int sixteenNineHeight = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(widthMeasureSpec) * 9 / 16, View.MeasureSpec.EXACTLY);
             super.onMeasure(widthMeasureSpec, sixteenNineHeight);
         } else
@@ -82,12 +87,12 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
         return isFullScreen;
     }
 
-    public boolean isPaused(){
+    public boolean isPaused() {
         return youTubePlayer.isPaused();
     }
 
     public void enterFullScreen() {
-        if(isFullScreen)
+        if (isFullScreen)
             return;
 
         ViewGroup.LayoutParams viewParams = getLayoutParams();
@@ -97,12 +102,12 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
 
         isFullScreen = true;
 
-        for(YouTubePlayerFullScreenListener fullScreenListener : fullScreenListeners)
+        for (YouTubePlayerFullScreenListener fullScreenListener : fullScreenListeners)
             fullScreenListener.onYouTubePlayerEnterFullScreen();
     }
 
     public void exitFullScreen() {
-        if(!isFullScreen)
+        if (!isFullScreen)
             return;
 
         ViewGroup.LayoutParams viewParams = getLayoutParams();
@@ -112,12 +117,12 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
 
         isFullScreen = false;
 
-        for(YouTubePlayerFullScreenListener fullScreenListener : fullScreenListeners)
+        for (YouTubePlayerFullScreenListener fullScreenListener : fullScreenListeners)
             fullScreenListener.onYouTubePlayerExitFullScreen();
     }
 
     public void toggleFullScreen() {
-        if(isFullScreen)
+        if (isFullScreen)
             exitFullScreen();
         else
             enterFullScreen();
@@ -138,14 +143,15 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
 
     /**
      * Initialize the player
-     * @param youTubeListener lister for player events
+     *
+     * @param youTubeListener     lister for player events
      * @param handleNetworkEvents if <b>true</b> a broadcast receiver will be registered.<br/>If <b>false</b> you should handle network events with your broadcast receiver. See {@link YouTubePlayerView#onNetworkAvailable()} and {@link YouTubePlayerView#onNetworkUnavailable()}
      */
     public void initialize(@Nullable final YouTubePlayer.YouTubeListener youTubeListener, boolean handleNetworkEvents) {
-        if(handleNetworkEvents)
+        if (handleNetworkEvents)
             getContext().registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        if(!Utils.isOnline(getContext())) {
+        if (!Utils.isOnline(getContext())) {
             Log.e("YouTubePlayerView", "Can't initialize because device is not connected to the internet.");
 
             onNetworkAvailableCallback = new Callable() {
@@ -170,7 +176,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * See {@link YouTubePlayer#loadVideo(String, float)}
      */
     public void loadVideo(String videoId, float startSecond) {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -183,7 +189,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * See {@link YouTubePlayer#cueVideo(String, float)}
      */
     public void cueVideo(String videoId, float startSeconds) {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -197,7 +203,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * Call this method before destroying the host Fragment/Activity
      */
     public void release() {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -213,7 +219,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * See {@link YouTubePlayer#seekTo(int)}
      */
     public void seekTo(int time) {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -225,7 +231,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * See {@link YouTubePlayer#play()}
      */
     public void playVideo() {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -237,7 +243,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
      * See {@link YouTubePlayer#pause()}
      */
     public void pauseVideo() {
-        if(!initialized) {
+        if (!initialized) {
             Log.e("YouTubePlayerView", "the player has not been initialized");
             return;
         }
@@ -248,7 +254,7 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
     @Override
     public void onNetworkAvailable() {
         Log.d("YouTubePlayerView", "Network available.");
-        if(!initialized && onNetworkAvailableCallback != null)
+        if (!initialized && onNetworkAvailableCallback != null)
             onNetworkAvailableCallback.call();
         else
             playbackResumer.resume();
@@ -285,5 +291,13 @@ public class YouTubePlayerView extends FrameLayout implements NetworkReceiver.Ne
 
     public void hideDurationVideo(boolean hide) {
         playerControlsWrapper.hideDurationVideo(hide);
+    }
+
+    public void mute() {
+        youTubePlayer.mute();
+    }
+
+    public void unMute() {
+        youTubePlayer.unmute();
     }
 }

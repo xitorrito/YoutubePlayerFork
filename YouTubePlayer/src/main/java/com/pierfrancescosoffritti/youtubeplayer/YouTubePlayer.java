@@ -127,12 +127,12 @@ public class YouTubePlayer extends WebView {
         });
     }
 
-    protected boolean isPaused(){
+    protected boolean isPaused() {
         return isPaused;
     }
 
     protected void play() {
-        isPaused=false;
+        isPaused = false;
         mainThreadHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -142,7 +142,7 @@ public class YouTubePlayer extends WebView {
     }
 
     protected void pause() {
-        isPaused=true;
+        isPaused = true;
         mainThreadHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -171,6 +171,25 @@ public class YouTubePlayer extends WebView {
 
     protected boolean removeListener(YouTubeListener listener) {
         return youTubeListeners.remove(listener);
+    }
+
+    protected void mute() {
+        mainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                loadUrl("javascript:mute()");
+            }
+        });
+
+    }
+
+    protected void unmute() {
+        mainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                loadUrl("javascript:unMute()");
+            }
+        });
     }
 
     public interface YouTubeListener {
